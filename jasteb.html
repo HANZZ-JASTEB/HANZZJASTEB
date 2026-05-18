@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HANZZ JASTEB Admin Panel</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body { background-color: #fff; color: #333; padding: 15px; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
+        h1 { font-size: 20px; color: #FF0000; }
+        .btn-refresh { background: #FF0000; color: #fff; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .table-card { border: 1px solid #ddd; border-radius: 8px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 400px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; font-size: 14px; }
+        th { background: #f8f9fa; color: #666; text-transform: uppercase; font-size: 12px; }
+        .btn-delete { background: #d93025; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn-delete:active { background: #a51d16; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>HANZZ JASTEB Admin Panel</h1>
+            <button class="btn-refresh" onclick="loadData()">Refresh Data</button>
+        </div>
+
+        <div id="loading" style="text-align:center; padding:20px;">Memuat database...</div>
+
+        <div class="table-card" id="tableCard" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <tbody id="dataList"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Masukkan URL API SheetDB lu di sini
+        const SHEETDB_URL = 'https://sheetdb.io/api/v1/88dp9i3eezpg7';
+
+        async function loadData() {
+            const list = document.getElementById('dataList');
+            const loading = document.getElementById('loading');
+            const card = document.getElementById('tableCard');
+
+            loading.style.display = 'block';
+            card.style.display = 'none';
+            list.innerHTML = "";
+
+            try {
+                const response = await fetch(SHEETDB_URL);
+                const data = await response.json();
+                
+                if (data.length === 0) {
+                    loading.innerText = "Data Kosong.";
+                    return;
+                }
+
+                data.forEach(item => {
+                    // Logika: ambil value dari kolom "Email" dan "Password"
+                    // Pastikan di Google Sheets lu tulisannya persis "Email" & "Password"
+                    const email = item.Email;
+                    const pass = item.Password;
+
+                    list.innerHTML += `
+                        <tr>
+                            <td>${email}</td>
+                            <td><code>${pass}</code></td>
+                            <td>
+                                <button class="btn-delete" onclick="hapusSebaris('${email}')">Hapus</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                loading.style.display = 'none';
+                card.style.display = 'block';
+            } catch (e) {
+                loading.innerText = "Gagal terhubung ke API.";
+            }
+        }
+
+        async function hapusSebaris(targetEmail) {
+            if (!confirm(`Hapus data untuk: ${targetEmail}?`)) return;
+            
+            try {
+                // Logika: DELETE /NamaKolom/IsiData
+                // encodeURIComponent gunanya biar tanda '@' di email gak bikin error URL
+                const response = await fetch(`${SHEETDB_URL}/Email/${encodeURIComponent(targetEmail)}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+
+                if (result.deleted > 0) {
+                    alert("Data berhasil dihapus!");
+                    loadData(); // Update tampilan tabel
+                } else {
+                    alert("Gagal! Cek apakah nama kolom 'Email' di Sheet sudah bener.");
+                }
+            } catch (e) {
+                alert("Terjadi kesalahan koneksi!");
+            }
+        }
+
+        // Jalankan saat pertama kali buka
+        loadData();
+
+ // Cek apakah sudah login
+    const userData = localStorage.getItem("userLogin");
+    if (!userData) {
+        window.location.href = "index.html";
+    }
+    </script>
+</body>
+</html>
