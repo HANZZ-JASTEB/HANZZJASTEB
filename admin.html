@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HANZZ JASTEB ADMIN PAGE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #F3F4F6;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #991B1B;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #D1D5DB;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: #4B5563;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        .nav-btn:hover {
+            background: #374151;
+            transform: translateY(-1px);
+        }
+
+        .logout-btn {
+            background: #7F1D1D;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #991B1B;
+            transform: translateY(-1px);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-top: 5px solid #991B1B;
+        }
+
+        .form-card h2 {
+            color: #991B1B;
+            margin-bottom: 10px;
+        }
+
+        .form-card .subtitle {
+            color: #6B7280;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #991B1B;
+            box-shadow: 0 0 0 3px rgba(153, 27, 27, 0.1);
+        }
+
+        .limit-input {
+            display: block;
+        }
+
+        .limit-auto {
+            background: #F3F4F6;
+            padding: 12px 15px;
+            border-radius: 10px;
+            color: #4B5563;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: #991B1B;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background: #7F1D1D;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(153, 27, 27, 0.3);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+            display: none;
+        }
+
+        .alert-success {
+            background: #10B981;
+        }
+
+        .alert-error {
+            background: #EF4444;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 640px) {
+            .navbar-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .form-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="navbar-content">
+        <div class="logo">
+            HANZZ JASTEB <span>| Admin Page</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-btn">🏠 Dashboard</a>
+            <a href="database.html" class="nav-btn">🗄️ Database User</a>
+            <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+        </div>
+    </div>
+</div>
+
+<!-- Form Tambah User -->
+<div class="container">
+    <div class="form-card">
+        <h2>➕ Tambah User Baru</h2>
+        <p class="subtitle">Masukkan data user untuk akses ke sistem Jasteb</p>
+        
+        <div class="form-group">
+            <label>👤 Username</label>
+            <input type="text" id="username" placeholder="Masukkan username" autocomplete="off">
+        </div>
+        
+        <div class="form-group">
+            <label>🔒 Password</label>
+            <input type="password" id="password" placeholder="Masukkan password">
+        </div>
+        
+        <div class="form-group">
+            <label>🎭 Role</label>
+            <select id="role" onchange="ubahLimit()">
+                <option value="Member">Member</option>
+                <option value="Admin">Admin</option>
+            </select>
+        </div>
+        
+        <div class="form-group" id="limitGroup">
+            <label>📊 Limit</label>
+            <div id="limitInput"></div>
+        </div>
+        
+        <button class="btn-submit" id="submitBtn" onclick="tambahUser()">💾 Simpan User</button>
+    </div>
+</div>
+
+<!-- Alert Notification -->
+<div id="alert" class="alert"></div>
+
+<script>
+    // SheetDB URL untuk data user
+    const SHEETDB_USER_URL = "https://sheetdb.io/api/v1/02k55cr9l5wzs";
+    
+    // Fungsi untuk mengubah tampilan limit berdasarkan role
+    function ubahLimit() {
+        const role = document.getElementById("role").value;
+        const limitGroup = document.getElementById("limitGroup");
+        const limitInputDiv = document.getElementById("limitInput");
+        
+        if (role === "Admin") {
+            // Admin: Limit otomatis "N" (tidak terbatas)
+            limitInputDiv.innerHTML = `<div class="limit-auto">♾️ Unlimited (N)</div>`;
+        } else {
+            // Member: limit 1-20
+            limitInputDiv.innerHTML = `<input type="number" id="limit" placeholder="Limit 1 - 20" min="1" max="20" value="10">
+                                        <small style="color: #6B7280; display: block; margin-top: 5px;">* Limit untuk Member antara 1 - 20</small>`;
+        }
+    }
+    
+    // Fungsi untuk menampilkan alert
+    function showAlert(message, type = "success") {
+        const alert = document.getElementById("alert");
+        alert.textContent = message;
+        alert.className = `alert alert-${type}`;
+        alert.style.display = "block";
+        
+        setTimeout(() => {
+            alert.style.display = "none";
+        }, 3000);
+    }
+    
+    // Fungsi untuk menambah user ke SheetDB
+    async function tambahUser() {
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value;
+        const role = document.getElementById("role").value;
+        
+        // Validasi input
+        if (!username) {
+            showAlert("Username harus diisi!", "error");
+            return;
+        }
+        
+        if (!password) {
+            showAlert("Password harus diisi!", "error");
+            return;
+        }
+        
+        // Tentukan limit berdasarkan role
+        let limit = "";
+        
+        if (role === "Admin") {
+            limit = "N";
+        } else {
+            // Member
+            const limitInput = document.getElementById("limit");
+            if (!limitInput || !limitInput.value) {
+                showAlert("Limit harus diisi!", "error");
+                return;
+            }
+            limit = limitInput.value;
+            if (parseInt(limit) < 1 || parseInt(limit) > 20) {
+                showAlert("Limit untuk Member harus antara 1 - 20!", "error");
+                return;
+            }
+        }
+        
+        // Cek apakah username sudah ada
+        const submitBtn = document.getElementById("submitBtn");
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="loading"></span> Menyimpan...';
+        
+        try {
+            // Ambil data user yang sudah ada
+            const response = await fetch(SHEETDB_USER_URL);
+            const users = await response.json();
+            
+            // Cek duplikasi username
+            const userExist = users.find(user => user.Username === username);
+            if (userExist) {
+                showAlert(`Username "${username}" sudah ada! Gunakan username lain.`, "error");
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '💾 Simpan User';
+                return;
+            }
+            
+            // Data baru
+            const newUser = {
+                Username: username,
+                Password: password,
+                Role: role,
+                Limit: limit.toString()
+            };
+            
+            // Kirim POST ke SheetDB
+            const postResponse = await fetch(SHEETDB_USER_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newUser)
+            });
+            
+            if (!postResponse.ok) {
+                throw new Error("Gagal menyimpan data");
+            }
+            
+            showAlert(`✅ User "${username}" berhasil ditambahkan!`, "success");
+            
+            // Reset form
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("role").value = "Member";
+            ubahLimit();
+            
+        } catch (error) {
+            console.error("Error:", error);
+            showAlert("Gagal menambahkan user: " + error.message, "error");
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '💾 Simpan User';
+        }
+    }
+    
+    // Fungsi logout
+    function logout() {
+        window.location.href = "index.html";
+    }
+    
+    // Inisialisasi limit saat load
+    ubahLimit();
+    
+    // Cek apakah sudah login (redirect jika belum)
+    const userData = localStorage.getItem("userLogin");
+    if (!userData) {
+        window.location.href = "index.html";
+    } else {
+        const user = JSON.parse(userData);
+        // Hanya Admin yang boleh akses halaman ini
+        if (user.role !== "Admin" && user.role !== "Developer") {
+            alert("Akses ditolak! Halaman ini hanya untuk Admin.");
+            window.location.href = "index.html";
+        }
+    }
+</script>
+</body>
+</html>
