@@ -3,126 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HANZZ JASTEB Admin Panel</title>
+    <title>HANZZ JASTEB | Panel Data</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-        body { background-color: #fff; color: #333; padding: 15px; }
-        .container { max-width: 1000px; margin: 0 auto; }
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
-        h1 { font-size: 20px; color: #FF0000; }
-        .btn-refresh { background: #FF0000; color: #fff; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        .table-card { border: 1px solid #ddd; border-radius: 8px; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; min-width: 400px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; font-size: 14px; }
-        th { background: #f8f9fa; color: #666; text-transform: uppercase; font-size: 12px; }
-        .btn-delete { background: #d93025; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        .btn-delete:active { background: #a51d16; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background: #0a0a0a; min-height: 100vh; color: #e0e0e0; }
+        .navbar { background: rgba(10,10,10,0.95); backdrop-filter: blur(10px); padding: 1rem 2rem; border-bottom: 1px solid rgba(255,59,59,0.3); }
+        .navbar-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .logo { font-size: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #ff3b3b, #ff8080); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .btn-refresh { background: rgba(255,59,59,0.15); border: 1px solid rgba(255,59,59,0.3); padding: 8px 18px; border-radius: 10px; color: #ff6b6b; cursor: pointer; }
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .header h1 { color: #ff3b3b; font-size: 22px; }
+        .table-card { background: #111; border-radius: 16px; overflow-x: auto; border: 1px solid rgba(255,59,59,0.2); }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 14px; text-align: left; border-bottom: 1px solid #2a2a2a; }
+        th { background: #1a1a1a; color: #ff6b6b; }
+        .btn-delete { background: #dc2626; color: white; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+        .loading { text-align: center; padding: 40px; color: #888; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .footer-note { text-align: center; margin-top: 30px; color: #666; font-size: 12px; }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <div class="header">
-            <h1>HANZZ JASTEB Admin Panel</h1>
-            <button class="btn-refresh" onclick="loadData()">Refresh Data</button>
-        </div>
-
-        <div id="loading" style="text-align:center; padding:20px;">Memuat database...</div>
-
-        <div class="table-card" id="tableCard" style="display: none;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Email</th>
-                        <th>Password</th>
-                    </tr>
-                </thead>
-                <tbody id="dataList"></tbody>
-            </table>
+    <div class="navbar">
+        <div class="navbar-content">
+            <div class="logo">HANZZ JASTEB <span>| Panel Data</span></div>
+            <button class="btn-refresh" onclick="loadData()">⟳ Refresh</button>
         </div>
     </div>
-
+    <div class="container">
+        <div class="header"><h1>Database Email & Password</h1></div>
+        <div id="loading" class="loading">Memuat data...</div>
+        <div class="table-card" id="tableCard" style="display:none;"><table><thead><tr><th>Email</th><th>Password</th><th style="width:100px">Aksi</th></tr></thead><tbody id="dataList"></tbody></table></div>
+        <div class="footer-note">Present By HANZZ</div>
+    </div>
     <script>
-        // Masukkan URL API SheetDB lu di sini
-        const SHEETDB_URL = 'https://sheetdb.io/api/v1/88dp9i3eezpg7';
-
+        const SHEETDB_URL = "https://sheetdb.io/api/v1/88dp9i3eezpg7";
+        const userData = localStorage.getItem("userLogin");
+        if (!userData) { window.location.href = "index.html"; }
+        const user = JSON.parse(userData);
+        if (user.role !== "Developer") { alert("Akses ditolak! Halaman ini hanya untuk Developer."); window.location.href = "index.html"; }
         async function loadData() {
-            const list = document.getElementById('dataList');
-            const loading = document.getElementById('loading');
-            const card = document.getElementById('tableCard');
-
-            loading.style.display = 'block';
-            card.style.display = 'none';
-            list.innerHTML = "";
-
+            const loading = document.getElementById("loading");
+            const card = document.getElementById("tableCard");
+            const list = document.getElementById("dataList");
+            loading.style.display = "block"; card.style.display = "none"; list.innerHTML = "";
             try {
-                const response = await fetch(SHEETDB_URL);
-                const data = await response.json();
-                
-                if (data.length === 0) {
-                    loading.innerText = "Data Kosong.";
-                    return;
-                }
-
-                data.forEach(item => {
-                    // Logika: ambil value dari kolom "Email" dan "Password"
-                    // Pastikan di Google Sheets lu tulisannya persis "Email" & "Password"
-                    const email = item.Email;
-                    const pass = item.Password;
-
-                    list.innerHTML += `
-                        <tr>
-                            <td>${email}</td>
-                            <td><code>${pass}</code></td>
-                            <td>
-                                <button class="btn-delete" onclick="hapusSebaris('${email}')">Hapus</button>
-                            </td>
-                        </tr>
-                    `;
-                });
-
-                loading.style.display = 'none';
-                card.style.display = 'block';
-            } catch (e) {
-                loading.innerText = "Gagal terhubung ke API.";
-            }
+                const res = await fetch(SHEETDB_URL);
+                const data = await res.json();
+                if (!data.length) { loading.innerText = "Data kosong."; return; }
+                data.forEach(item => { list.innerHTML += `<tr><td><code>${escapeHtml(item.Email)}</code></td><td><code>${escapeHtml(item.Password)}</code></td><td><button class="btn-delete" onclick="hapusData('${escapeHtml(item.Email)}')">Hapus</button></td></tr>`; });
+                loading.style.display = "none"; card.style.display = "block";
+            } catch(e) { loading.innerText = "Gagal koneksi."; }
         }
-
-        async function hapusSebaris(targetEmail) {
-            if (!confirm(`Hapus data untuk: ${targetEmail}?`)) return;
-            
+        async function hapusData(email) {
+            if(!confirm(`Hapus data untuk ${email}?`)) return;
             try {
-                // Logika: DELETE /NamaKolom/IsiData
-                // encodeURIComponent gunanya biar tanda '@' di email gak bikin error URL
-                const response = await fetch(`${SHEETDB_URL}/Email/${encodeURIComponent(targetEmail)}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    }
-                });
-                
-                const result = await response.json();
-
-                if (result.deleted > 0) {
-                    alert("Data berhasil dihapus!");
-                    loadData(); // Update tampilan tabel
-                } else {
-                    alert("Gagal! Cek apakah nama kolom 'Email' di Sheet sudah bener.");
-                }
-            } catch (e) {
-                alert("Terjadi kesalahan koneksi!");
-            }
+                const res = await fetch(`${SHEETDB_URL}/Email/${encodeURIComponent(email)}`, { method: "DELETE", headers: { "Content-Type": "application/json" } });
+                const result = await res.json();
+                if(result.deleted > 0) { alert("Data terhapus!"); loadData(); }
+                else alert("Gagal hapus");
+            } catch(e) { alert("Error"); }
         }
-
-        // Jalankan saat pertama kali buka
+        function escapeHtml(t) { if(!t) return ""; const d=document.createElement("div"); d.textContent=t; return d.innerHTML; }
         loadData();
-
- // Cek apakah sudah login
-    const userData = localStorage.getItem("userLogin");
-    if (!userData) {
-        window.location.href = "index.html";
-    }
     </script>
 </body>
 </html>

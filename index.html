@@ -9,377 +9,343 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #F3F4F6;
+            background: #0a0a0a;
             min-height: 100vh;
+            color: #e0e0e0;
         }
 
-        /* ========== LOGIN PAGE STYLE ========== */
+        /* Login Page */
         #loginPage {
-            background: linear-gradient(135deg, #991B1B 0%, #4B5563 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+        }
+
+        #loginPage::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,0,0,0.1) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         .login-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            padding: 40px;
-            max-width: 400px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 45px 40px;
+            max-width: 420px;
             width: 100%;
-            border-top: 5px solid #991B1B;
+            border: 1px solid rgba(255, 60, 60, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(255, 0, 0, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .login-container:hover {
+            border-color: rgba(255, 60, 60, 0.6);
+            box-shadow: 0 25px 50px -12px rgba(255, 0, 0, 0.4);
         }
 
         .login-container h2 {
-            color: #991B1B;
-            margin-bottom: 10px;
+            color: #ff3b3b;
+            font-size: 28px;
+            margin-bottom: 8px;
             text-align: center;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 10px rgba(255, 60, 60, 0.3);
         }
 
         .login-container .subtitle {
-            color: #6B7280;
-            margin-bottom: 30px;
-            font-size: 14px;
+            color: #999;
+            margin-bottom: 32px;
+            font-size: 13px;
             text-align: center;
+            border-bottom: 1px solid rgba(255, 60, 60, 0.2);
+            display: inline-block;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 8px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: #374151;
+            font-weight: 500;
+            color: #ccc;
+            font-size: 13px;
+            letter-spacing: 0.5px;
         }
 
         .form-group input {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #E5E7EB;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: all 0.3s;
+            padding: 14px 16px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            color: #fff;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #991B1B;
-            box-shadow: 0 0 0 3px rgba(153, 27, 27, 0.1);
+            border-color: #ff3b3b;
+            box-shadow: 0 0 0 3px rgba(255, 59, 59, 0.15);
+            background: #1f1f1f;
         }
 
         .login-btn {
             width: 100%;
             padding: 14px;
-            background: #991B1B;
+            background: linear-gradient(135deg, #ff3b3b 0%, #cc0000 100%);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .login-btn:hover {
-            background: #7F1D1D;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(153, 27, 27, 0.3);
+            box-shadow: 0 8px 20px rgba(255, 59, 59, 0.3);
         }
 
         .login-btn:disabled {
             opacity: 0.6;
-            cursor: not-allowed;
             transform: none;
+            cursor: not-allowed;
         }
 
         .error {
-            background: #FEE2E2;
-            color: #991B1B;
+            background: rgba(255, 59, 59, 0.15);
+            color: #ff6b6b;
             padding: 12px;
             border-radius: 10px;
             margin-top: 20px;
-            font-size: 14px;
+            font-size: 13px;
             display: none;
-            border: 1px solid #FECACA;
+            border: 1px solid rgba(255, 59, 59, 0.3);
+            text-align: center;
         }
 
         .loading {
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
             border-radius: 50%;
             border-top-color: white;
-            animation: spin 0.8s linear infinite;
+            animation: spin 0.6s linear infinite;
             margin-right: 8px;
+            vertical-align: middle;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        /* ========== DASHBOARD STYLE ========== */
+        /* Dashboard Page */
         #dashboardPage {
             display: none;
             min-height: 100vh;
+            background: #0a0a0a;
         }
 
         .navbar {
-            background: #991B1B;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(255, 59, 59, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .navbar-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
         }
 
-        .logo {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
+        /* Navbar H1 di kiri */
+        .navbar h1 {
+            color: #ff3b3b;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 10px rgba(255, 59, 59, 0.3);
+            margin: 0;
         }
 
-        .logo span {
-            color: #D1D5DB;
-        }
-
-        .nav-links {
+        /* Profile Avatar di kanan */
+        .profile-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #ff3b3b, #990000);
+            border-radius: 50%;
             display: flex;
-            gap: 15px;
             align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .nav-btn {
-            background: #4B5563;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 8px;
+            justify-content: center;
             cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
+            transition: all 0.2s ease;
+            border: 2px solid rgba(255, 59, 59, 0.5);
         }
 
-        .nav-btn:hover {
-            background: #374151;
-            transform: translateY(-1px);
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            border-color: #ff3b3b;
+            box-shadow: 0 0 15px rgba(255, 59, 59, 0.3);
         }
 
-        .logout-btn {
-            background: #7F1D1D;
+        .profile-avatar span {
+            font-size: 18px;
+            font-weight: bold;
             color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
         }
 
-        .logout-btn:hover {
-            background: #991B1B;
-            transform: translateY(-1px);
-        }
-
+        /* Container */
         .container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
+        /* Welcome Card */
         .welcome-card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
+            background: #111;
+            border-radius: 20px;
+            padding: 35px 30px;
             margin-bottom: 30px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border-left: 5px solid #991B1B;
+            border-left: 4px solid #ff3b3b;
+            border-top: 1px solid rgba(255, 59, 59, 0.2);
+            border-right: 1px solid rgba(255, 59, 59, 0.2);
+            border-bottom: 1px solid rgba(255, 59, 59, 0.2);
+            text-align: center;
         }
 
         .welcome-card h2 {
-            color: #991B1B;
-            margin-bottom: 15px;
+            color: #ff3b3b;
+            margin-bottom: 8px;
+            font-size: 22px;
         }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+        .welcome-card p {
+            color: #888;
+            font-size: 13px;
         }
 
-        .info-card {
-            background: #F9FAFB;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #E5E7EB;
-            text-align: center;
-        }
-
-        .info-card .label {
-            font-size: 12px;
-            color: #6B7280;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .info-card .value {
-            font-size: 24px;
-            font-weight: bold;
-            color: #1F2937;
-            margin-top: 8px;
-            word-break: break-all;
-        }
-
-        /* Stats Card untuk Admin */
-        .stats-card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border-left: 5px solid #4B5563;
-            text-align: center;
-        }
-
-        .stats-card h3 {
-            color: #4B5563;
-            margin-bottom: 10px;
-        }
-
-        .stats-number {
-            font-size: 48px;
-            font-weight: bold;
-            color: #991B1B;
-            margin: 15px 0;
-        }
-
-        .stats-refresh {
-            background: #4B5563;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            margin-top: 10px;
-        }
-
-        .stats-refresh:hover {
-            background: #374151;
-        }
-
-        /* Form Kirim Jasteb */
+        /* Form Kirim */
         .jasteb-card {
-            background: white;
-            border-radius: 16px;
+            background: #111;
+            border-radius: 20px;
             padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border-top: 5px solid #F59E0B;
+            border-top: 4px solid #ff3b3b;
+            border: 1px solid rgba(255, 59, 59, 0.2);
         }
 
         .jasteb-card h3 {
-            color: #F59E0B;
-            margin-bottom: 10px;
+            color: #ff3b3b;
+            margin-bottom: 6px;
+            font-size: 20px;
         }
 
         .jasteb-card .subtitle {
-            color: #6B7280;
-            margin-bottom: 25px;
-            font-size: 14px;
+            color: #888;
+            margin-bottom: 22px;
+            font-size: 13px;
         }
 
         .form-input {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .form-input label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: #374151;
+            font-weight: 500;
+            color: #ccc;
+            font-size: 13px;
         }
 
         .form-input input {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #E5E7EB;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: all 0.3s;
+            padding: 12px 14px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #fff;
+            transition: all 0.2s;
         }
 
         .form-input input:focus {
             outline: none;
-            border-color: #F59E0B;
-            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+            border-color: #ff3b3b;
+            box-shadow: 0 0 0 3px rgba(255, 59, 59, 0.1);
         }
 
         .btn-send {
             width: 100%;
             padding: 14px;
-            background: #F59E0B;
-            color: white;
+            background: linear-gradient(135deg, #ff3b3b, #cc0000);
             border: none;
-            border-radius: 10px;
-            font-size: 16px;
+            border-radius: 12px;
+            color: white;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 10px;
+            transition: all 0.2s;
+            margin-top: 8px;
         }
 
         .btn-send:hover {
-            background: #D97706;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+            box-shadow: 0 5px 20px rgba(255, 59, 59, 0.3);
         }
 
         .btn-send:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+            opacity: 0.5;
             transform: none;
         }
 
         .info-text {
-            background: #EFF6FF;
+            background: rgba(255, 59, 59, 0.08);
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 10px;
             margin-top: 15px;
-            font-size: 13px;
-            color: #1E40AF;
+            font-size: 12px;
+            color: #aaa;
+            text-align: center;
         }
 
         .warning-text {
-            background: #FEF3C7;
+            background: rgba(255, 100, 0, 0.1);
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 10px;
             margin-top: 15px;
-            font-size: 13px;
-            color: #92400E;
-            border-left: 4px solid #F59E0B;
+            font-size: 12px;
+            color: #ff8c42;
+            text-align: center;
         }
 
         .progress-container {
@@ -388,56 +354,191 @@
         }
 
         .progress-bar {
-            background: #E5E7EB;
+            background: #2a2a2a;
             border-radius: 10px;
-            height: 10px;
+            height: 6px;
             overflow: hidden;
         }
 
         .progress-fill {
-            background: #F59E0B;
+            background: #ff3b3b;
             width: 0%;
             height: 100%;
             transition: width 0.3s;
         }
 
         .progress-text {
-            font-size: 12px;
-            color: #6B7280;
-            margin-top: 5px;
+            font-size: 11px;
+            color: #888;
+            margin-top: 6px;
             text-align: center;
+        }
+
+        .stats-card {
+            background: #111;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 59, 59, 0.2);
+        }
+
+        .stats-card h3 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        .stats-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff3b3b;
+            margin: 10px 0;
+        }
+
+        .stats-refresh {
+            background: rgba(255, 59, 59, 0.15);
+            border: 1px solid rgba(255, 59, 59, 0.3);
+            padding: 8px 20px;
+            border-radius: 10px;
+            color: #ff6b6b;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #111;
+            border-radius: 20px;
+            max-width: 380px;
+            width: 90%;
+            border: 1px solid rgba(255, 59, 59, 0.4);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: modalFadeIn 0.2s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 59, 59, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            color: #ff3b3b;
+            font-size: 18px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover {
+            color: #ff3b3b;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .user-info-item {
+            background: #1a1a1a;
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border-left: 3px solid #ff3b3b;
+        }
+
+        .user-info-item .label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .user-info-item .value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 5px;
+            word-break: break-all;
+        }
+
+        .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-btn {
+            background: rgba(255, 59, 59, 0.1);
+            border: 1px solid rgba(255, 59, 59, 0.3);
+            padding: 12px;
+            border-radius: 10px;
+            color: #ff6b6b;
+            text-decoration: none;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .modal-btn:hover {
+            background: rgba(255, 59, 59, 0.2);
+            border-color: #ff3b3b;
+            color: #ff3b3b;
         }
 
         .alert {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 10px;
+            bottom: 25px;
+            right: 25px;
+            padding: 12px 20px;
+            border-radius: 12px;
             color: white;
-            font-weight: 600;
-            z-index: 1000;
-            animation: slideIn 0.3s ease;
+            font-weight: 500;
+            z-index: 1100;
+            animation: slideInRight 0.3s ease;
             display: none;
+            font-size: 13px;
         }
 
-        .alert-success {
-            background: #10B981;
-        }
+        .alert-success { background: #10b981; }
+        .alert-error { background: #ef4444; }
+        .alert-warning { background: #f59e0b; }
 
-        .alert-error {
-            background: #EF4444;
-        }
-
-        .alert-warning {
-            background: #F59E0B;
-        }
-
-        .alert-info {
-            background: #3B82F6;
-        }
-
-        @keyframes slideIn {
+        @keyframes slideInRight {
             from {
                 transform: translateX(100%);
                 opacity: 0;
@@ -448,609 +549,244 @@
             }
         }
 
-        .feature-card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .feature-card p {
-            color: #6B7280;
-            margin-top: 10px;
-        }
-
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-
-        hr {
-            margin: 20px 0;
-            border: none;
-            border-top: 1px solid #E5E7EB;
-        }
-
-        .footer-note {
-            font-size: 12px;
-            color: #991B1B;
-            text-align: center;
-            margin-top: 20px;
-        }
-
         @media (max-width: 640px) {
-            .navbar-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            .welcome-card h2 {
-                font-size: 18px;
-            }
+            .navbar { padding: 0.8rem 1.5rem; }
+            .navbar h1 { font-size: 18px; }
+            .profile-avatar { width: 38px; height: 38px; }
+            .profile-avatar span { font-size: 14px; }
+            .container { margin: 30px auto; }
+            .welcome-card { padding: 25px 20px; }
+            .jasteb-card { padding: 25px; }
         }
     </style>
 </head>
 <body>
 
-<!-- HALAMAN LOGIN -->
+<!-- Login Page -->
 <div id="loginPage">
     <div class="login-container">
-        <h2>HANZZ JASTEB</h2></h2>
-        <p class="subtitle">Login Requiet</p>
-        
+        <h2>HANZZ JASTEB</h2>
         <div class="form-group">
-            <label>👤 Username</label>
-            <input type="text" id="username" placeholder="Masukkan username" autocomplete="off">
+            <label>Username</label>
+            <input type="text" id="username" placeholder="Masukkan Username" autocomplete="off">
         </div>
-        
         <div class="form-group">
-            <label>🔒 Password</label>
-            <input type="password" id="password" placeholder="Masukkan password">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Masukkan Password">
         </div>
-        
+        <p class="navbar">No Acces? Buy in bit.ly/HANZZOFC</p>
         <button class="login-btn" id="loginBtn" onclick="prosesLogin()">Login</button>
-        
         <div id="errorMsg" class="error"></div>
     </div>
 </div>
 
-<!-- HALAMAN DASHBOARD -->
+<!-- Dashboard Page -->
 <div id="dashboardPage">
     <div class="navbar">
         <div class="navbar-content">
-            <div class="logo">
-                HANZZ JASTEB <span></span>
-            </div>
-            <div class="nav-links" id="navLinks">
-                <!-- Tombol akan ditampilkan oleh JavaScript berdasarkan role -->
+            <h1>HANZZ JASTEB</h1>
+            <div class="profile-avatar" onclick="openProfileModal()">
+                <span id="avatarInitial">👤</span>
             </div>
         </div>
     </div>
 
     <div class="container">
         <div class="welcome-card">
-            <h2>✅ Dashboard  HANZZ JASTEB</h2>
-            <p>Data akun Anda:</p>
-            
-            <div class="info-grid">
-                <div class="info-card">
-                    <div class="label">Username</div>
-                    <div class="value" id="displayUsername">-</div>
-                </div>
-                <div class="info-card">
-                    <div class="label">Role</div>
-                    <div class="value" id="displayRole">-</div>
-                </div>
-                <div class="info-card">
-                    <div class="label">Limit</div>
-                    <div class="value" id="displayLimit">-</div>
-                </div>
-            </div>
+            <h2 id="welcomeGreeting">Welcome</h2>
+            <p>to HANZZ JASTEB</p>
         </div>
 
-        <!-- Statistik Data untuk Role Admin -->
         <div id="adminStats" style="display: none;">
             <div class="stats-card">
-                <h3>📊 Database Email Jasteb</h3>
+                <h3>Database Jasteb</h3>
                 <div class="stats-number" id="totalDataCount">-</div>
-                <p>Total data Email & Password yang tersedia</p>
-                <button class="stats-refresh" onclick="loadDataStats()">🔄 Refresh</button>
+                <p>total data di database</p>
+                <button class="stats-refresh" onclick="loadDataStats()">⟳ Refresh</button>
             </div>
         </div>
 
-        <!-- Form Kirim Jasteb - KHUSUS UNTUK ROLE MEMBER -->
         <div id="jastebForm" style="display: none;">
             <div class="jasteb-card">
-                <h3>📧 Kirim Jasteb</h3>
-                <p class="subtitle">Kirim Jasteb ke Email target</p>
-                
-                <div class="form-input">
-                    <label>📧 Email Target (Penerima)</label>
-                    <input type="email" id="targetEmail" placeholder="contoh: penerima@email.com">
-                </div>
-                
-                <div class="form-input">
-                    <label>👤 Nama Penerima</label>
-                    <input type="text" id="namaDepan" placeholder="Masukkan nama penerima">
-                </div>
-                
-                <div class="form-input">
-                    <label>🔢 Jumlah Jasteb</label>
-                    <input type="number" id="jumlahJasteb" min="1" placeholder="Masukkan jumlah jasteb">
-                </div>
-                
-                <button class="btn-send" id="sendBtn" onclick="kirimJasteb()">🚀 Kirim Jasteb</button>
-                
-                <div class="progress-container" id="progressContainer">
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progressFill"></div>
-                    </div>
-                    <div class="progress-text" id="progressText">Mengirim 0/0</div>
-                </div>
-                
-                <div class="info-text" id="infoText">
-                    ℹ️ Mengambil data dari Database
-                </div>
-                
-                <div id="warningText" class="warning-text" style="display: none;">
-                    ⚠️ Limit Anda habis! Silahkan hubungi admin untuk buat akun baru!
-                </div>
+                <h3>Send Jasteb</h3>
+                <p class="subtitle">Masukan data Email dan Nama penerima!</p>
+                <div class="form-input"><label>Email</label><input type="email" id="targetEmail" placeholder="example123@email.com"></div>
+                <div class="form-input"><label>Nama</label><input type="text" id="namaDepan" placeholder="Masukan nama"></div>
+                <div class="form-input"><label>Jumlah Jasteb(sesuai limit)</label><input type="number" id="jumlahJasteb" min="1" placeholder="1 - 20"></div>
+                <button class="btn-send" id="sendBtn" onclick="kirimJasteb()">SEND</button>
+                <div class="progress-container" id="progressContainer"><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div><div class="progress-text" id="progressText">0/0</div></div>
+                <div class="info-text" id="infoText">⏳ Loading...</div>
+                <div id="warningText" class="warning-text" style="display: none;">⚠️ Limit habis! Hubungi admin.</div>
             </div>
         </div>
 
-        <!-- Fitur Lainnya (Developer/Admin melihat ini jika bukan Member) -->
-        <div id="otherFeatures" style="display: none;">
-            <div class="feature-card">
-                <div class="feature-icon"></div>
-                <h3></h3>
-                <p><br></p>
-                <hr>
-                <div class="footer-note"></div>
-            </div>
+        <div id="otherFeatures" style="display: none;"><div class="stats-card"><h3>HANZZ DEVELOPER</h3><p>Present By HANZZ</p></div></div>
+    </div>
+</div>
+
+<!-- Modal Profile -->
+<div id="profileModal" class="modal" onclick="if(event.target===this) closeProfileModal()">
+    <div class="modal-content">
+        <div class="modal-header"><h3>👤 Akun</h3><button class="close-modal" onclick="closeProfileModal()">×</button></div>
+        <div class="modal-body">
+            <div class="user-info-item"><div class="label">USERNAME</div><div class="value" id="modalUsername">-</div></div>
+            <div class="user-info-item"><div class="label">ROLE</div><div class="value" id="modalRole">-</div></div>
+            <div class="user-info-item"><div class="label">LIMIT</div><div class="value" id="modalLimit">-</div></div>
+            <div class="modal-buttons" id="modalButtons"></div>
+            <button class="modal-btn" onclick="logout()" style="margin-top:5px; background:rgba(255,59,59,0.2);">Logout</button>
         </div>
+    </div>
+</div>
+
+<!-- Modal Notifikasi -->
+<div id="notifModal" class="modal" onclick="if(event.target===this) closeNotifModal()">
+    <div class="modal-content" style="max-width: 350px;">
+        <div class="modal-header"><h3 id="notifTitle">Informasi</h3><button class="close-modal" onclick="closeNotifModal()">×</button></div>
+        <div class="modal-body"><p id="notifMessage" style="color:#ccc; line-height:1.5;"></p></div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-    // ========== KONFIGURASI ==========
     const EMAILJS_PUBLIC_KEY = "jdVLaTALUNA4FjZwo";
     const EMAILJS_SERVICE_ID = "service_0lzqo44";
     const EMAILJS_TEMPLATE_ID = "template_nztw5rr";
-    
     const SHEETDB_USER_URL = "https://sheetdb.io/api/v1/02k55cr9l5wzs";
     const SHEETDB_DATA_URL = "https://sheetdb.io/api/v1/88dp9i3eezpg7";
-    
-    // Inisialisasi EmailJS
+
     emailjs.init(EMAILJS_PUBLIC_KEY);
-    
-    // ========== FUNGSI LOGIN ==========
+
+    let currentUser = null;
+
     async function prosesLogin() {
         const username = document.getElementById("username").value.trim();
         const password = document.getElementById("password").value;
         const loginBtn = document.getElementById("loginBtn");
         const errorDiv = document.getElementById("errorMsg");
-        
         errorDiv.style.display = "none";
-        
-        if (!username || !password) {
-            tampilkanError("Username dan Password harus diisi!");
-            return;
-        }
-        
-        loginBtn.disabled = true;
-        loginBtn.innerHTML = '<span class="loading"></span> Loading...';
-        
+        if (!username || !password) { showError("Username & password wajib diisi!"); return; }
+        loginBtn.disabled = true; loginBtn.innerHTML = '<span class="loading"></span> Loading...';
         try {
-            const response = await fetch(SHEETDB_USER_URL);
-            
-            if (!response.ok) {
-                throw new Error("User belum terdaftar");
-            }
-            
-            const users = await response.json();
-            
-            const userValid = users.find(user => 
-                user.Username === username && user.Password === password
-            );
-            
-            if (userValid) {
-                const userData = {
-                    username: userValid.Username,
-                    role: userValid.Role || "Member",
-                    limit: userValid.Limit === "N" ? "N" : parseInt(userValid.Limit) || 0
-                };
-                
-                localStorage.setItem("userLogin", JSON.stringify(userData));
-                window.currentUser = userData;
-                
-                tampilkanDashboard();
-            } else {
-                tampilkanError("Username atau Password salah!");
-            }
-            
-        } catch (error) {
-            console.error("Error:", error);
-            tampilkanError("Terjadi kesalahan: " + error.message);
-        } finally {
-            loginBtn.disabled = false;
-            loginBtn.innerHTML = "Login";
+            const res = await fetch(SHEETDB_USER_URL);
+            if (!res.ok) throw new Error("Gagal koneksi");
+            const users = await res.json();
+            const valid = users.find(u => u.Username === username && u.Password === password);
+            if (valid) {
+                currentUser = { username: valid.Username, role: valid.Role || "Member", limit: valid.Limit === "N" ? "N" : parseInt(valid.Limit) || 0 };
+                localStorage.setItem("userLogin", JSON.stringify(currentUser));
+                renderDashboard();
+            } else { showError("Username atau password salah!"); }
+        } catch(e) { showError("Error: " + e.message); }
+        finally { loginBtn.disabled = false; loginBtn.innerHTML = "MASUK"; }
+    }
+
+    function showError(msg) { const div = document.getElementById("errorMsg"); div.textContent = msg; div.style.display = "block"; setTimeout(() => div.style.display = "none", 3000); }
+    function showAlert(msg, type="success") { const a = document.createElement("div"); a.className = `alert alert-${type}`; a.textContent = msg; document.body.appendChild(a); a.style.display = "block"; setTimeout(() => a.remove(), 4000); }
+    function showModal(title, msg) { document.getElementById("notifTitle").innerText = title; document.getElementById("notifMessage").innerHTML = msg; document.getElementById("notifModal").style.display = "flex"; }
+    function closeNotifModal() { document.getElementById("notifModal").style.display = "none"; }
+
+    function openProfileModal() {
+        if(!currentUser) return;
+        document.getElementById("modalUsername").innerText = currentUser.username;
+        document.getElementById("modalRole").innerText = currentUser.role;
+        document.getElementById("modalLimit").innerText = currentUser.limit === "N" ? "Unlimited" : currentUser.limit;
+        const btnContainer = document.getElementById("modalButtons");
+        btnContainer.innerHTML = "";
+        if(currentUser.role === "Developer"){
+            btnContainer.innerHTML = '<a href="database.html" class="modal-btn">🗄️ Database User</a><a href="create.html" class="modal-btn">📝 Create Member</a><a href="add.html" class="modal-btn">➕ Add Data</a><a href="jasteb.html" class="modal-btn">📊 Panel Data</a><a href="admin.html" class="modal-btn">👑 Admin Panel</a>';
         }
+        else if(currentUser.role === "Admin"){
+            btnContainer.innerHTML = '<a href="create.html" class="modal-btn">📝 Create Member</a><a href="add.html" class="modal-btn">➕ Add Data</a>';
+        }
+        else {
+            btnContainer.innerHTML = '<button class="modal-btn" onclick="closeProfileModal();document.getElementById(\'jastebForm\').scrollIntoView({behavior:\'smooth\'})">📧 Send Jasteb</button>';
+        }
+        document.getElementById("profileModal").style.display = "flex";
     }
-    
-    function tampilkanError(pesan) {
-        const errorDiv = document.getElementById("errorMsg");
-        errorDiv.textContent = pesan;
-        errorDiv.style.display = "block";
-        
-        setTimeout(() => {
-            errorDiv.style.display = "none";
-        }, 3000);
-    }
-    
-    function showAlert(message, type = "success") {
-        const alertDiv = document.createElement("div");
-        alertDiv.className = `alert alert-${type}`;
-        alertDiv.textContent = message;
-        document.body.appendChild(alertDiv);
-        alertDiv.style.display = "block";
-        
-        setTimeout(() => {
-            alertDiv.remove();
-        }, 5000);
-    }
-    
-    // ========== FUNGSI UPDATE LIMIT DI SHEETDB ==========
+    function closeProfileModal() { document.getElementById("profileModal").style.display = "none"; }
+
     async function updateLimitUser(username, newLimit) {
-        try {
-            // Cari dulu ID atau data user tersebut
-            const response = await fetch(SHEETDB_USER_URL);
-            const users = await response.json();
-            
-            const userToUpdate = users.find(user => user.Username === username);
-            if (!userToUpdate) {
-                console.error("User tidak ditemukan");
-                return false;
-            }
-            
-            // Update limit dengan PATCH request
-            const updateResponse = await fetch(`${SHEETDB_USER_URL}/Username/${encodeURIComponent(username)}`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    Limit: newLimit.toString()
-                })
-            });
-            
-            if (!updateResponse.ok) {
-                throw new Error("Gagal update limit");
-            }
-            
-            console.log(`Limit user ${username} diupdate menjadi ${newLimit}`);
-            return true;
-            
-        } catch (error) {
-            console.error("Error update limit:", error);
-            return false;
-        }
+        try { const upd = await fetch(`${SHEETDB_USER_URL}/Username/${encodeURIComponent(username)}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ Limit: newLimit.toString() }) }); return upd.ok; } catch(e) { return false; }
     }
-    
-    // ========== FUNGSI LOAD STATISTIK DATA ==========
     async function loadDataStats() {
-        const totalDataElem = document.getElementById("totalDataCount");
-        if (totalDataElem) {
-            totalDataElem.innerHTML = '<span class="loading"></span>';
-        }
-        
-        try {
-            const response = await fetch(SHEETDB_DATA_URL);
-            const data = await response.json();
-            const totalData = data.length;
-            
-            if (totalDataElem) {
-                totalDataElem.innerHTML = totalData;
-            }
-        } catch (error) {
-            console.error("Error load stats:", error);
-            if (totalDataElem) {
-                totalDataElem.innerHTML = "❌";
-            }
-        }
+        const el = document.getElementById("totalDataCount");
+        if(el) el.innerHTML = '<span class="loading"></span>';
+        try { const res = await fetch(SHEETDB_DATA_URL); const data = await res.json(); if(el) el.innerHTML = data.length; } catch(e) { if(el) el.innerHTML = "❌"; }
     }
-    
-    // ========== FUNGSI DASHBOARD ==========
-    function tampilkanDashboard() {
-        if (!window.currentUser) return;
-        
-        document.getElementById("displayUsername").innerText = window.currentUser.username;
-        document.getElementById("displayRole").innerText = window.currentUser.role;
-        document.getElementById("displayLimit").innerText = window.currentUser.limit === "N" ? "♾️ Unlimited" : window.currentUser.limit;
-        
-        tampilkanTombolBerdasarkanRole(window.currentUser.role);
-        
-        const jastebForm = document.getElementById("jastebForm");
-        const otherFeatures = document.getElementById("otherFeatures");
-        const adminStats = document.getElementById("adminStats");
-        
-        if (window.currentUser.role === "Member") {
-            jastebForm.style.display = "block";
-            otherFeatures.style.display = "none";
-            adminStats.style.display = "none";
-            updateInfoLimit();
-        } 
-        else if (window.currentUser.role === "Admin") {
-            jastebForm.style.display = "none";
-            otherFeatures.style.display = "block";
-            adminStats.style.display = "block";
-            loadDataStats();
-        }
-        else if (window.currentUser.role === "Developer") {
-            jastebForm.style.display = "none";
-            otherFeatures.style.display = "block";
-            adminStats.style.display = "none";
-        }
-        
+    async function updateInfoLimit() {
+        try { const res = await fetch(SHEETDB_DATA_URL); const data = await res.json(); const total = data.length; const limit = currentUser.limit; const info = document.getElementById("infoText"); const warn = document.getElementById("warningText");
+            if(limit === "N"){ info.innerHTML = `📊 ${total} data tersedia<br>✅ Unlimited`; warn.style.display = "none"; }
+            else if(limit <= 0){ info.innerHTML = `📊 ${total} data tersedia<br>⚠️ Sisa limit: 0`; warn.style.display = "block"; document.getElementById("sendBtn").disabled = true; }
+            else { info.innerHTML = `📊 ${total} data tersedia<br>📌 Sisa limit: ${limit}`; warn.style.display = "none"; document.getElementById("sendBtn").disabled = false; }
+        } catch(e){}
+    }
+
+    function renderDashboard() {
+        if(!currentUser) return;
+        document.getElementById("welcomeGreeting").innerHTML = `Welcome, ${currentUser.username}`;
+        const jf = document.getElementById("jastebForm"); const stats = document.getElementById("adminStats"); const other = document.getElementById("otherFeatures");
+        if(currentUser.role === "Member"){ jf.style.display = "block"; stats.style.display = "none"; other.style.display = "none"; updateInfoLimit(); }
+        else if(currentUser.role === "Admin"){ jf.style.display = "none"; stats.style.display = "block"; other.style.display = "none"; loadDataStats(); }
+        else { jf.style.display = "none"; stats.style.display = "none"; other.style.display = "block"; }
         document.getElementById("loginPage").style.display = "none";
         document.getElementById("dashboardPage").style.display = "block";
     }
-    
-    async function updateInfoLimit() {
-        try {
-            const response = await fetch(SHEETDB_DATA_URL);
-            const data = await response.json();
-            const totalData = data.length;
-            const userLimit = window.currentUser.limit;
-            
-            const infoText = document.getElementById("infoText");
-            const warningText = document.getElementById("warningText");
-            
-            if (userLimit === "N") {
-                infoText.innerHTML = `📊 Tersedia ${totalData} data di database.<br>✅ Limit Anda Unlimited (N).<`;
-                warningText.style.display = "none";
-            } else if (userLimit === 0 || userLimit <= 0) {
-                infoText.innerHTML = `📊 Tersedia ${totalData} data di database.<br>📌 Sisa Limit Anda: ${userLimit}`;
-                warningText.style.display = "block";
-                // Disable tombol kirim
-                const sendBtn = document.getElementById("sendBtn");
-                if (sendBtn) sendBtn.disabled = true;
-            } else {
-                infoText.innerHTML = `📊 Tersedia ${totalData} data di database.<br>📌 Sisa Limit Anda: ${userLimit}`;
-                warningText.style.display = "none";
-                // Enable tombol kirim
-                const sendBtn = document.getElementById("sendBtn");
-                if (sendBtn) sendBtn.disabled = false;
-            }
-        } catch (error) {
-            console.error("Error ambil data:", error);
-        }
-    }
-    
-    function tampilkanTombolBerdasarkanRole(role) {
-        const navLinks = document.getElementById("navLinks");
-        navLinks.innerHTML = "";
-        
-        if (role === "Developer") {
-            navLinks.innerHTML = `
-                <a href="database.html" class="nav-btn">🗄️ Database User</a>
-                <a href="create.html" class="nav-btn">📝 Create Member</a>
-                <a href="add.html" class="nav-btn">➕ Add</a>
-                <a href="jasteb.html" class="nav-btn">📊 Panel</a>
-                <a href="admin.html" class="nav-btn">👑 Admin Page</a>
-                <button class="logout-btn" onclick="logout()">🚪 Logout</button>
-            `;
-        } 
-        else if (role === "Admin") {
-            navLinks.innerHTML = `
-                <a href="create.html" class="nav-btn">📝 Create Member</a>
-                <a href="add.html" class="nav-btn">➕ Add</a>
-                <button class="logout-btn" onclick="logout()">🚪 Logout</button>
-            `;
-        }
-        else {
-            navLinks.innerHTML = `
-                <button class="logout-btn" onclick="logout()">🚪 Logout</button>
-            `;
-        }
-    }
-    
-    // ========== FUNGSI KIRIM JASTEB (PER DATA - DENGAN PENGURANGAN LIMIT) ==========
+
     async function kirimJasteb() {
-        const targetEmail = document.getElementById("targetEmail").value.trim();
-        const namaDepan = document.getElementById("namaDepan").value.trim();
+        const toEmail = document.getElementById("targetEmail").value.trim();
+        const nama = document.getElementById("namaDepan").value.trim();
         const jumlah = parseInt(document.getElementById("jumlahJasteb").value);
-        const sendBtn = document.getElementById("sendBtn");
-        
-        if (!targetEmail) {
-            showAlert("Email target harus diisi!", "error");
-            return;
-        }
-        
-        if (!isValidEmail(targetEmail)) {
-            showAlert("Format email tidak valid!", "error");
-            return;
-        }
-        
-        if (!namaDepan) {
-            showAlert("Nama depan penerima harus diisi!", "error");
-            return;
-        }
-        
-        if (!jumlah || jumlah < 1) {
-            showAlert("Jumlah Jasteb harus minimal 1!", "error");
-            return;
-        }
-        
-        // CEK LIMIT SEBELUM MULAI
-        const currentLimit = window.currentUser.limit;
-        if (currentLimit !== "N" && currentLimit < jumlah) {
-            showAlert(`Limit tidak mencukupi! Sisa limit Anda ${currentLimit}.`, "error");
-            return;
-        }
-        
-        if (currentLimit === 0 || currentLimit <= 0) {
-            showAlert("Limit Anda sudah habis! Silahkan hubungi admin.", "error");
-            return;
-        }
-        
-        sendBtn.disabled = true;
-        sendBtn.innerHTML = '<span class="loading"></span> Mengambil data...';
-        
-        const progressContainer = document.getElementById("progressContainer");
-        progressContainer.style.display = "none";
-        
+        const btn = document.getElementById("sendBtn");
+        if(!toEmail){ showAlert("Email target harus diisi","error"); return; }
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(toEmail)){ showAlert("Email tidak valid","error"); return; }
+        if(!nama){ showAlert("Nama penerima harus diisi","error"); return; }
+        if(!jumlah || jumlah<1){ showAlert("Minimal 1 data","error"); return; }
+        const limitNow = currentUser.limit;
+        if(limitNow !== "N" && limitNow < jumlah){ showAlert(`Limit tidak cukup! Sisa: ${limitNow}`,"error"); return; }
+        if(limitNow === 0 || limitNow <= 0 && limitNow !== "N"){ showAlert("Limit habis!","error"); return; }
+        btn.disabled = true; btn.innerHTML = '<span class="loading"></span> Proses...';
+        const prog = document.getElementById("progressContainer"); prog.style.display = "block";
+        const fill = document.getElementById("progressFill"); const txt = document.getElementById("progressText");
         try {
-            const response = await fetch(SHEETDB_DATA_URL);
-            const data = await response.json();
-            const totalData = data.length;
-            
-            if (jumlah > totalData) {
-                showAlert(`Data tidak mencukupi! Tersedia hanya ${totalData} data.`, "error");
-                sendBtn.disabled = false;
-                sendBtn.innerHTML = '🚀 Kirim Jasteb';
-                return;
-            }
-            
-            // Ambil data random
+            const res = await fetch(SHEETDB_DATA_URL);
+            const data = await res.json();
+            if(jumlah > data.length){ showAlert(`Data hanya ${data.length}`, "error"); btn.disabled=false; btn.innerHTML="KIRIM"; prog.style.display="none"; return; }
             const shuffled = [...data];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            const randomData = shuffled.slice(0, jumlah);
-            
-            // Buat greeting berdasarkan waktu
-            const now = new Date();
-            const hours = now.getHours();
-            let waktu = "";
-            if (hours >= 5 && hours < 12) {
-                waktu = "Pagi";
-            } else if (hours >= 12 && hours < 15) {
-                waktu = "Siang";
-            } else if (hours >= 15 && hours < 18) {
-                waktu = "Sore";
-            } else {
-                waktu = "Malam";
-            }
-            const greeting = `Selamat ${waktu}, ${namaDepan}!`;
-            
-            // Tampilkan progress bar
-            progressContainer.style.display = "block";
-            const progressFill = document.getElementById("progressFill");
-            const progressText = document.getElementById("progressText");
-            
-            sendBtn.innerHTML = '<span class="loading"></span> Mengirim email...';
-            
-            // Kirim SATU PER SATU (per data)
-            let berhasil = 0;
-            let gagal = 0;
-            
-            for (let i = 0; i < randomData.length; i++) {
-                const item = randomData[i];
-                const emailText = item.Email || "-";
-                const passwordText = item.Password || "-";
-                
-                const templateParams = {
-                    to_email: targetEmail,
-                    greeting: greeting,
-                    email: emailText,
-                    password: passwordText
-                };
-                
+            for(let i=shuffled.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]]; }
+            const selected = shuffled.slice(0,jumlah);
+            const hour = new Date().getHours();
+            let waktu = hour>=5 && hour<12 ? "Pagi" : hour>=12 && hour<15 ? "Siang" : hour>=15 && hour<18 ? "Sore" : "Malam";
+            const greeting = `Selamat ${waktu}, ${nama}!`;
+            let berhasil=0, gagal=0;
+            for(let i=0;i<selected.length;i++){
+                const item = selected[i];
                 try {
-                    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+                    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, { to_email: toEmail, greeting: greeting, email: item.Email || "-", password: item.Password || "-" });
                     berhasil++;
-                    console.log(`[${i+1}/${jumlah}] Berhasil dikirim: ${emailText}`);
-                } catch (err) {
-                    gagal++;
-                    console.error(`[${i+1}/${jumlah}] Gagal:`, err);
-                }
-                
-                // Update progress bar
-                const persen = ((i + 1) / jumlah) * 100;
-                progressFill.style.width = `${persen}%`;
-                progressText.innerText = `Mengirim ${i+1}/${jumlah} (${Math.round(persen)}%) - Berhasil: ${berhasil}, Gagal: ${gagal}`;
-                
-                // Jeda 1 detik agar tidak kena limit API
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                } catch(e){ gagal++; }
+                const persen = ((i+1)/jumlah)*100;
+                fill.style.width = `${persen}%`;
+                txt.innerText = `${i+1}/${jumlah} (${Math.round(persen)}%) ✅${berhasil} ❌${gagal}`;
+                await new Promise(r => setTimeout(r, 1000));
             }
-            
-            // ========== UPDATE LIMIT DI SHEETDB ==========
-            if (berhasil > 0 && currentLimit !== "N") {
-                const sisaLimit = currentLimit - berhasil;
-                const updateSuccess = await updateLimitUser(window.currentUser.username, sisaLimit);
-                
-                if (updateSuccess) {
-                    // Update local user data
-                    window.currentUser.limit = sisaLimit;
-                    localStorage.setItem("userLogin", JSON.stringify(window.currentUser));
-                    
-                    // Update tampilan dashboard
-                    document.getElementById("displayLimit").innerText = sisaLimit;
-                    
-                    showAlert(`✅ Pengiriman selesai! ${berhasil} berhasil, ${gagal} gagal. Sisa limit Anda: ${sisaLimit}`, berhasil > 0 ? "success" : "error");
-                } else {
-                    showAlert(`✅ Email terkirim! ${berhasil} berhasil, ${gagal} gagal. Namun gagal update limit.`, "warning");
-                }
-            } else if (berhasil > 0 && currentLimit === "N") {
-                showAlert(`✅ Selesai! ${berhasil} berhasil dikirim, ${gagal} gagal. (Limit Unlimited)`, "success");
-            } else {
-                showAlert(`❌ Gagal! ${berhasil} berhasil, ${gagal} gagal.`, "error");
-            }
-            
-            document.getElementById("targetEmail").value = "";
-            document.getElementById("namaDepan").value = "";
-            document.getElementById("jumlahJasteb").value = "";
-            
+            if(berhasil>0 && limitNow !== "N"){
+                const sisa = limitNow - berhasil;
+                const ok = await updateLimitUser(currentUser.username, sisa);
+                if(ok){ currentUser.limit = sisa; localStorage.setItem("userLogin", JSON.stringify(currentUser)); showAlert(`✅ ${berhasil} terkirim! Sisa limit: ${sisa}`, "success"); showModal("Berhasil!", `${berhasil} akun berhasil dikirim ke ${toEmail}<br>Sisa limit: ${sisa}`); }
+                else showAlert(`Email terkirim (${berhasil}) tapi gagal update limit`,"warning");
+            } else if(berhasil>0 && limitNow === "N"){ showAlert(`✅ ${berhasil} berhasil dikirim!`,"success"); showModal("Berhasil!", `${berhasil} akun berhasil dikirim ke ${toEmail}`); }
+            else { showAlert("Gagal mengirim semua data","error"); }
+            document.getElementById("targetEmail").value = ""; document.getElementById("namaDepan").value = ""; document.getElementById("jumlahJasteb").value = "";
             await updateInfoLimit();
-            
-        } catch (error) {
-            console.error("Error lengkap:", error);
-            showAlert("Gagal mengirim: " + (error.text || error.message), "error");
-        } finally {
-            sendBtn.disabled = false;
-            sendBtn.innerHTML = '🚀 Kirim Jasteb';
-            setTimeout(() => {
-                progressContainer.style.display = "none";
-            }, 3000);
-        }
+        } catch(e){ showAlert("Error: "+e.message,"error"); }
+        finally { btn.disabled=false; btn.innerHTML="KIRIM"; setTimeout(()=>prog.style.display="none",2000); }
     }
-    
-    function isValidEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-    
-    function logout() {
-        window.currentUser = null;
-        localStorage.removeItem("userLogin");
-        
-        document.getElementById("username").value = "";
-        document.getElementById("password").value = "";
-        
-        document.getElementById("loginPage").style.display = "flex";
-        document.getElementById("dashboardPage").style.display = "none";
-    }
-    
-    // Cek session
-    const savedUser = localStorage.getItem("userLogin");
-    if (savedUser) {
-        window.currentUser = JSON.parse(savedUser);
-        tampilkanDashboard();
-    } else {
-        document.getElementById("loginPage").style.display = "flex";
-        document.getElementById("dashboardPage").style.display = "none";
-        window.currentUser = null;
-    }
-    
-    // Event Enter key
-    document.getElementById("password").addEventListener("keypress", function(e) {
-        if (e.key === "Enter") prosesLogin();
-    });
-    document.getElementById("username").addEventListener("keypress", function(e) {
-        if (e.key === "Enter") prosesLogin();
-    });
+
+    function logout() { currentUser = null; localStorage.removeItem("userLogin"); document.getElementById("username").value = ""; document.getElementById("password").value = ""; document.getElementById("loginPage").style.display = "flex"; document.getElementById("dashboardPage").style.display = "none"; }
+
+    (function init(){ const saved = localStorage.getItem("userLogin"); if(saved){ currentUser = JSON.parse(saved); renderDashboard(); } else { document.getElementById("loginPage").style.display = "flex"; document.getElementById("dashboardPage").style.display = "none"; } })();
+    document.getElementById("password")?.addEventListener("keypress", e => { if(e.key === "Enter") prosesLogin(); });
+    document.getElementById("username")?.addEventListener("keypress", e => { if(e.key === "Enter") prosesLogin(); });
 </script>
 </body>
 </html>
