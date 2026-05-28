@@ -54,7 +54,7 @@
     </div>
     <div id="alert" class="alert"></div>
     <script>
-        const SHEETDB_URL = "https://sheetdb.io/api/v1/02k55cr9l5wzs";
+        const SHEETDB_URL = "https://sheetdb.io/api/v1/dywc2rk19dipr";
         const userData = localStorage.getItem("userLogin");
         if (!userData) { window.location.href = "index.html"; }
         const user = JSON.parse(userData);
@@ -64,7 +64,7 @@
             const role = document.getElementById("role").value;
             const div = document.getElementById("limitInput");
             if (role === "Admin") div.innerHTML = `<div class="limit-auto">♾️ Unlimited (N)</div>`;
-            else div.innerHTML = `<input type="number" id="limit" min="1" max="20" value="10"><small style="color:#888; display:block; margin-top:5px;">Limit Member 1-20</small>`;
+            else div.innerHTML = `<input type="number" id="limit" min="1" max="20" value="10"><small style="color:#888; display:block; margin-top:5px;">Limit Member 1 - 30</small>`;
         }
         async function tambahUser() {
             const username = document.getElementById("username").value.trim();
@@ -74,7 +74,7 @@
             if (!password) { showAlert("Password wajib!", "error"); return; }
             let limit = "";
             if (role === "Admin") limit = "N";
-            else { const l = document.getElementById("limit"); if (!l || !l.value) { showAlert("Limit wajib!", "error"); return; } limit = l.value; if (parseInt(limit)<1 || parseInt(limit)>20) { showAlert("Limit Member 1-20", "error"); return; } }
+            else { const l = document.getElementById("limit"); if (!l || !l.value) { showAlert("Limit wajib!", "error"); return; } limit = l.value; if (parseInt(limit)<1 || parseInt(limit)>30) { showAlert("Limit Member 1 - 30", "error"); return; } }
             const btn = document.getElementById("submitBtn");
             btn.disabled = true; btn.innerHTML = '<span class="loading"></span> Menyimpan...';
             try {

